@@ -3,6 +3,7 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     private Rigidbody _rigidBody;
+    private CameraLook _cameraLook;
     
     [Header("Movement")]
     private Vector2 _inputAxes;
@@ -18,10 +19,14 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         _rigidBody = GetComponent<Rigidbody>();
+        _cameraLook = GetComponentInChildren<CameraLook>();
     }
 
     void FixedUpdate()
     {
+        //update rotation based on camera look
+        gameObject.transform.rotation = Quaternion.Euler(0f, _cameraLook.GetYAxisRotation(), 0f);
+
         //Check for movement input
         CheckMovement();
         CheckJump();
