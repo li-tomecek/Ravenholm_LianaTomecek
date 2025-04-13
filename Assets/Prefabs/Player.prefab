@@ -14,9 +14,9 @@ GameObject:
   - component: {fileID: 6016236063523827730}
   - component: {fileID: 4624525465031807462}
   - component: {fileID: 2418336126673942567}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -51,6 +51,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _movementSpeed: 0.1
   _jumpHeight: 7
+  _respawnTransform: {fileID: 0}
 --- !u!33 &5607212075302040583
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -315,13 +316,33 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 6685760424878238161}
     m_Modifications:
+    - target: {fileID: 1369442048745331289, guid: 8c7f91106c8ab29478b7a09734b7973f, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3734137509936806027, guid: 8c7f91106c8ab29478b7a09734b7973f, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4699772428444004812, guid: 8c7f91106c8ab29478b7a09734b7973f, type: 3}
       propertyPath: _sightOrigin
       value: 
       objectReference: {fileID: 6685760424878238161}
+    - target: {fileID: 4699772428444004812, guid: 8c7f91106c8ab29478b7a09734b7973f, type: 3}
+      propertyPath: _launchVelocity
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 5456444642494422057, guid: 8c7f91106c8ab29478b7a09734b7973f, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6604695009600514386, guid: 8c7f91106c8ab29478b7a09734b7973f, type: 3}
       propertyPath: m_Name
       value: GravityGun
+      objectReference: {fileID: 0}
+    - target: {fileID: 6604695009600514386, guid: 8c7f91106c8ab29478b7a09734b7973f, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8523290185098612377, guid: 8c7f91106c8ab29478b7a09734b7973f, type: 3}
       propertyPath: m_LocalPosition.x

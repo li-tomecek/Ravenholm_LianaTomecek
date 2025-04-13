@@ -43,27 +43,40 @@ public class GravityGun : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Mouse0))
         {
-            
-            if(_heldObject == null && _objectInSights != null && _objectInSights.GetComponent<Rigidbody>())     //pickup new object
+
+            if (_heldObject == null && _objectInSights != null && _objectInSights.GetComponent<Rigidbody>())     //pickup new object
             {
                 _heldObject = _objectInSights;
-
                 _heldObject.GetComponent<Rigidbody>().isKinematic = true;
 
-            } 
-            else if (_heldObject != null)                         //launch held object
-            {
-                _heldObject.GetComponent<Rigidbody>().isKinematic = false;
-
-                _heldObject.GetComponent<Rigidbody>().AddForce(_launchVelocity * _holdPosition.forward, ForceMode.Impulse);
-                _heldObject = null;
             }
+            else                        //launch held object
+                LaunchObject();
 
         }
 
         if (Input.GetKeyDown(KeyCode.Mouse1) && _heldObject)        //Drop the object
+            DropObject();
+    }
+
+    
+    
+    public void DropObject()
+    {
+        if(_heldObject != null)
         {
             _heldObject.GetComponent<Rigidbody>().isKinematic = false;
+            _heldObject = null;
+        }
+    }
+
+    public void LaunchObject()
+    {
+        if(_heldObject != null)
+        {
+            _heldObject.GetComponent<Rigidbody>().isKinematic = false;
+
+            _heldObject.GetComponent<Rigidbody>().AddForce(_launchVelocity * _holdPosition.forward, ForceMode.Impulse);
             _heldObject = null;
         }
     }

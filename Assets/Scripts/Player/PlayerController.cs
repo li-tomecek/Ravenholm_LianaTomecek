@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    private GravityGun _gravityGun;
     private Rigidbody _rigidBody;
     private CameraLook _cameraLook;
     
@@ -10,18 +11,17 @@ public class PlayerController : MonoBehaviour
     private Vector3 _movementVector;
     [SerializeField] private float _movementSpeed = 0.25f;
     [SerializeField] private float _jumpHeight = 10;
-    
-    
-    
-    
-    
+
+    [SerializeField] private Transform _respawnTransform;
+
+
     // ~~~ START AND UPDATE ~~~
     void Start()
     {
+        _gravityGun = GetComponentInChildren<GravityGun>();
         _rigidBody = GetComponent<Rigidbody>();
         _cameraLook = GetComponentInChildren<CameraLook>();
     }
-
     void FixedUpdate()
     {
         //update rotation based on camera look
@@ -31,11 +31,13 @@ public class PlayerController : MonoBehaviour
         CheckMovement();
         CheckJump();
 
+        if (Input.GetKeyDown(KeyCode.R))
+            Respawn();
 
     }
 
 
-    //~~~ MOVEMENT CONTROLS ~~~
+    // ~~~ MOVEMENT CONTROLS ~~~
     private void CheckMovement()
     {
         _inputAxes.x = Input.GetAxis("Horizontal");
@@ -76,4 +78,17 @@ public class PlayerController : MonoBehaviour
         return Physics.Raycast(transform.position, Vector3.down, 1.5f);
     }
 
+    // ~~~ RESPAWNS ~~~
+    public void SetRespawnPoint(Transform spawn)
+    {
+        _respawnTransform = spawn;
+    }
+
+    public void Respawn()
+    {
+        Debug.Log("Respawning to " + _respawnTransform.position);
+        _gravityGun.DropObject();
+        gameObject.transform.position = _respawnTransform.position;
+        gameObject.transform.rotation = _respawnTransform.rotation;
+    }
 }
