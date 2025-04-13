@@ -5,14 +5,17 @@ public class PlayerController : MonoBehaviour
     private GravityGun _gravityGun;
     private Rigidbody _rigidBody;
     private CameraLook _cameraLook;
-    
+
+    [SerializeField] private Transform _respawnTransform;
+
     [Header("Movement")]
     private Vector2 _inputAxes;
     private Vector3 _movementVector;
     [SerializeField] private float _movementSpeed = 0.25f;
     [SerializeField] private float _jumpHeight = 10;
 
-    [SerializeField] private Transform _respawnTransform;
+    private bool _jumpPressed;
+
 
 
     // ~~~ START AND UPDATE ~~~
@@ -22,23 +25,39 @@ public class PlayerController : MonoBehaviour
         _rigidBody = GetComponent<Rigidbody>();
         _cameraLook = GetComponentInChildren<CameraLook>();
     }
-    void FixedUpdate()
+    void Update()
     {
-        //update rotation based on camera look
-        gameObject.transform.rotation = Quaternion.Euler(0f, _cameraLook.GetYAxisRotation(), 0f);
-
         //Check for movement input
-        CheckMovement();
-        CheckJump();
+        UpdateMovementVector();
+        
+        if (IsGrounded() && Input.GetKeyDown(KeyCode.Space))
+            _jumpPressed = true;
 
+        //Check for other input
         if (Input.GetKeyDown(KeyCode.R))
             Respawn();
 
     }
 
+    void FixedUpdate()
+    {
+        //update rotation based on camera look
+        gameObject.transform.rotation = Quaternion.Euler(0f, _cameraLook.GetYAxisRotation(), 0f);
+
+        //move player
+        gameObject.transform.Translate(_movementVector);
+
+        //check for jump
+        if (_jumpPressed)
+        {
+            _rigidBody.AddForce(_jumpHeight * Vector3.up, ForceMode.Impulse);
+            _jumpPressed = false;
+        }
+    }
+
 
     // ~~~ MOVEMENT CONTROLS ~~~
-    private void CheckMovement()
+    private void UpdateMovementVector()
     {
         _inputAxes.x = Input.GetAxis("Horizontal");
         _inputAxes.y = Input.GetAxis("Vertical");
@@ -63,14 +82,6 @@ public class PlayerController : MonoBehaviour
             _movementVector += Vector3.left * _movementSpeed;
         }
 
-        gameObject.transform.Translate(_movementVector);
-    }
-    private void CheckJump()
-    {
-        if (IsGrounded() && Input.GetKeyDown(KeyCode.Space))
-        {
-            _rigidBody.AddForce(_jumpHeight * Vector3.up, ForceMode.Impulse);
-        }
     }
     private bool IsGrounded()
     {
