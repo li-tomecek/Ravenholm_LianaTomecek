@@ -1,8 +1,8 @@
 using System;
 using UnityEngine;
+using UnityEngine.Events;
 
-public class Interactable : MonoBehaviour
+public abstract class Interactable : MonoBehaviour
 {
-    [SerializeField] public delegate void Interact();
-    //[SerializeField] public event Action Interact;
+    [SerializeField] public UnityEvent _onInteractEvent; 
 }

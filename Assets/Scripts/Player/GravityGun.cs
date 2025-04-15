@@ -55,9 +55,9 @@ public class GravityGun : MonoBehaviour
 
                     }
                 }
-                else if (_objectInSights.layer == LayerMask.NameToLayer("Interactable"))
+                else if (_objectInSights.layer == LayerMask.NameToLayer("Interactable"))        //Interact with object (ex. Press a Button)
                 {
-
+                    _objectInSights.GetComponent<Interactable>()._onInteractEvent.Invoke();
                 }
 
             }

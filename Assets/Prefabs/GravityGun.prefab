@@ -379,4 +379,4 @@ MonoBehaviour:
   _sightDistance: 7
   _objectMask:
     serializedVersion: 2
-    m_Bits: 128
+    m_Bits: 384

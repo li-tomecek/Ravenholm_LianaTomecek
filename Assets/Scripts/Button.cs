@@ -1,16 +1,20 @@
 using UnityEngine;
-
+using UnityEngine.Events;
 public class Button : Interactable
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    [SerializeField] private Material _buttonPressedMaterial;
+    private bool _pressed;
+
+    public void Start()
     {
-        
+        _onInteractEvent.AddListener(PressButton);
     }
 
-    // Update is called once per frame
-    void Update()
+    public void PressButton()
     {
-        
+        if (_pressed)
+            return;
+        gameObject.GetComponent<MeshRenderer>().material = _buttonPressedMaterial;
+        _pressed = true;
     }
 }
