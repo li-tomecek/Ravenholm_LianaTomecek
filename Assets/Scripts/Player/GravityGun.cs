@@ -17,7 +17,7 @@ public class GravityGun : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        //Debug.DrawRay(_sightOrigin.position, _sightOrigin.forward * _sightDistance, Color.red);
+        Debug.DrawRay(_sightOrigin.position, _sightOrigin.forward * _sightDistance, Color.red);
 
         if(_heldObject == null && Physics.Raycast(_sightOrigin.position, _sightOrigin.forward, out RaycastHit hit, _sightDistance, _objectMask))
         {
@@ -44,18 +44,30 @@ public class GravityGun : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Mouse0))
         {
 
-            if (_heldObject == null && _objectInSights != null && _objectInSights.GetComponent<Rigidbody>())     //pickup new object
+            if(_objectInSights)
             {
-                _heldObject = _objectInSights;
-                _heldObject.GetComponent<Rigidbody>().isKinematic = true;
+                if (_objectInSights.layer == LayerMask.NameToLayer("Grabbable"))
+                {
+                    if (_heldObject == null && _objectInSights.GetComponent<Rigidbody>())   //Pick up object
+                    {
+                        _heldObject = _objectInSights;
+                        _heldObject.GetComponent<Rigidbody>().isKinematic = true;
+
+                    }
+                }
+                else if (_objectInSights.layer == LayerMask.NameToLayer("Interactable"))
+                {
+
+                }
 
             }
-            else                        //launch held object
+            else if(_heldObject)                                                              //Launch held object
+            {
                 LaunchObject();
-
+            }
         }
 
-        if (Input.GetKeyDown(KeyCode.Mouse1) && _heldObject)        //Drop the object
+        if (Input.GetKeyDown(KeyCode.Mouse1) && _heldObject)                            //Drop the object
             DropObject();
     }
 
