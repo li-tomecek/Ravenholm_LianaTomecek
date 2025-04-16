@@ -5,10 +5,13 @@ public class Waterfall : MonoBehaviour
 {
     [SerializeField] GameObject _particleEffects;
     BoxCollider _boxCollider;
+    
     [SerializeField] float _onTimer = 5;
     [SerializeField] float _offTimer = 3;
-    const float PARTICLE_FINISH_TIMER = 1.8f;      //how long it takes for the particles to fully dissapear when stopping the animation
-    const float PARTICLE_STARTUP_TIMER = 1f;      //how long it takes for the particles to reach a point in which they would collider with the player on startup
+    [SerializeField] float _startOffset = 0f;    
+    const float PARTICLE_FINISH_TIMER = 1.8f;       //how long it takes for the particles to fully dissapear when stopping the animation
+    const float PARTICLE_STARTUP_TIMER = 1f;        //how long it takes for the particles to reach a point in which they would collider with the player on startup
+    
     private bool _inCycle;
     
     
@@ -16,7 +19,11 @@ public class Waterfall : MonoBehaviour
     void Start()
     {
         _boxCollider = gameObject.GetComponent<BoxCollider>();
-       
+        _inCycle = true;
+        _onTimer += _startOffset;
+        StartCoroutine(PlayCycle());
+        _onTimer -= _startOffset;       //include offset for first cycle only
+
     }
 
     // Update is called once per frame
