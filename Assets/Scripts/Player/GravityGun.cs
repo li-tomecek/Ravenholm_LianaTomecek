@@ -17,7 +17,7 @@ public class GravityGun : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        Debug.DrawRay(_sightOrigin.position, _sightOrigin.forward * _sightDistance, Color.red);
+        //Debug.DrawRay(_sightOrigin.position, _sightOrigin.forward * _sightDistance, Color.red);
 
         if(_heldObject == null && Physics.Raycast(_sightOrigin.position, _sightOrigin.forward, out RaycastHit hit, _sightDistance, _objectMask))
         {
@@ -26,7 +26,7 @@ public class GravityGun : MonoBehaviour
         }
         else
         {
-            //Change CrosshairCOlor here
+            //Change CrosshairColor here
             _objectInSights = null;
 
         }
@@ -48,7 +48,7 @@ public class GravityGun : MonoBehaviour
             {
                 if (_objectInSights.layer == LayerMask.NameToLayer("Grabbable"))
                 {
-                    if (_heldObject == null && _objectInSights.GetComponent<Rigidbody>())   //Pick up object
+                    if (_heldObject == null && _objectInSights.GetComponent<Rigidbody>())       //Pick up object
                     {
                         _heldObject = _objectInSights;
                         _heldObject.GetComponent<BoxCollider>().enabled = false;
@@ -61,13 +61,13 @@ public class GravityGun : MonoBehaviour
                 }
 
             }
-            else if(_heldObject)                                                              //Launch held object
+            else if(_heldObject)                                                                //Launch held object
             {
                 LaunchObject();
             }
         }
 
-        if (Input.GetKeyDown(KeyCode.Mouse1) && _heldObject)                            //Drop the object
+        if (Input.GetKeyDown(KeyCode.Mouse1) && _heldObject)                                    //Drop the object
             DropObject();
     }
 
@@ -95,5 +95,10 @@ public class GravityGun : MonoBehaviour
             _heldObject.GetComponent<Rigidbody>().AddForce(_launchVelocity * _holdPosition.forward, ForceMode.Impulse);
             _heldObject = null;
         }
+    }
+
+    public GameObject GetHeldObject()
+    {
+        return _heldObject;
     }
 }

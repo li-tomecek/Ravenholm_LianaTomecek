@@ -102,4 +102,9 @@ public class PlayerController : MonoBehaviour
         gameObject.transform.position = _respawnTransform.position;
         gameObject.transform.rotation = _respawnTransform.rotation;
     }
+
+    public GravityGun GetGravityGun()
+    {
+        return _gravityGun;
+    }
 }
