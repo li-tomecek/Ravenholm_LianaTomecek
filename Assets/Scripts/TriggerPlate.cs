@@ -35,9 +35,11 @@ public class TriggerPlate : MonoBehaviour
             _onActivatedEvent.Invoke();
     }
 
+    /* Because plate is now on wall, we do not want it deactivating when the cube falls into the lava pit.
+     * 
     public void OnTriggerExit(Collider other)
     {
         if (other.gameObject.GetComponent<TriggerPlateKey>())
             _onDeactivatedEvent.Invoke();
-    }
+    }*/
 }
