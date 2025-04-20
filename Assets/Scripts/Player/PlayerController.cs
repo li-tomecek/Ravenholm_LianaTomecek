@@ -28,6 +28,8 @@ public class PlayerController : MonoBehaviour
     }
     void Update()
     {
+        if (CanvasManager.Instance.gamePaused)
+            return;
         //Check for movement input
         UpdateMovementVector();
         

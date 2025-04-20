@@ -22,6 +22,9 @@ public class CameraLook : MonoBehaviour
 
     public void Update()
     {
+        if (CanvasManager.Instance.gamePaused)
+            return;
+
         //1. Update the look rotation values based on Mouse input. ~ horizontal look (rotation) in player controller
 
         _lookRotation.y += Input.GetAxis("Mouse X");        //rotate around Y axis based on X mouse position
