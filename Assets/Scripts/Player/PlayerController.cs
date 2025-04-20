@@ -89,7 +89,7 @@ public class PlayerController : MonoBehaviour
     private bool IsGrounded()
     {
         //Debug.DrawLine(transform.position, transform.position + Vector3.down * 1.5f, Color.red);
-        return Physics.Raycast(transform.position, Vector3.down, 1.5f);
+        return Physics.Raycast(transform.position, Vector3.down, 1.4f);
     }
 
     // ~~~ RESPAWNS ~~~

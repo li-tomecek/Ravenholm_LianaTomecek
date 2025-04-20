@@ -40172,6 +40172,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2418336126673942567, guid: 0a0020a22294ea9498c7f4e405f8cb06, type: 3}
+      propertyPath: m_Mass
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 6495256530680428509, guid: 0a0020a22294ea9498c7f4e405f8cb06, type: 3}
       propertyPath: _crosshair
       value: 
@@ -40179,6 +40183,10 @@ PrefabInstance:
     - target: {fileID: 6495256530680428509, guid: 0a0020a22294ea9498c7f4e405f8cb06, type: 3}
       propertyPath: _launchVelocity
       value: 18
+      objectReference: {fileID: 0}
+    - target: {fileID: 6548866687864631868, guid: 0a0020a22294ea9498c7f4e405f8cb06, type: 3}
+      propertyPath: _jumpHeight
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 6548866687864631868, guid: 0a0020a22294ea9498c7f4e405f8cb06, type: 3}
       propertyPath: _activeCheckpoint
