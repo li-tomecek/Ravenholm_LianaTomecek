@@ -150,5 +150,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _explosionTimer: 4
+  _explosionRadius: 5
   _defaultMaterial: {fileID: 2100000, guid: b3d104e32195ec94690ddc2ed04367bd, type: 2}
   _flashMaterial: {fileID: 2100000, guid: 78b933cf87b2c7a468f7a3815b0fcc14, type: 2}

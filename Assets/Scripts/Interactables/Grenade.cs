@@ -3,8 +3,11 @@ using UnityEngine;
 
 public class Grenade : Grabbable
 {
+    [Header("Explosion")]
     [SerializeField] private float _explosionTimer;
-
+    [SerializeField] private float _explosionRadius = 1f;
+   
+    [Header("Materials")]
     [SerializeField] private Material _defaultMaterial;
     [SerializeField] private Material _flashMaterial;
 
@@ -52,7 +55,26 @@ public class Grenade : Grabbable
             yield return new WaitForSeconds(flashTime);
             timer -= flashTime;
         }
-            //explode that bitch
+        Explode();
+    }
+
+
+    void Explode()
+    {
+        Collider[] hitColliders = Physics.OverlapSphere(transform.position, _explosionRadius);
+        foreach (var hitCollider in hitColliders)
+        {
+            if (hitCollider.gameObject.CompareTag("Player"))
+            {
+                hitCollider.gameObject.GetComponent<PlayerController>().Respawn();
+            } 
+            else if (hitCollider.gameObject.CompareTag("Enemy")) 
+            {
+                Destroy(hitCollider.gameObject);
+            }
+        }
+
+        Destroy(gameObject);
     }
 
     private void ToggleMaterial()

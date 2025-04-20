@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Magnetic
   - GravityGun
+  - Enemy
   layers:
   - Default
   - TransparentFX

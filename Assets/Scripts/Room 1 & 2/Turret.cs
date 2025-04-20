@@ -36,8 +36,8 @@ public class Turret : MonoBehaviour
                 Random.Range(-_maxHorizontalSpread, _maxHorizontalSpread), 
                 0f);
 
-
-            FireBullet((rotation * (_target.position - _bulletOrigin.position)).normalized);
+            if(_bulletOrigin != null)
+                FireBullet((rotation * (_target.position - _bulletOrigin.position)).normalized);
 
             yield return new WaitForSeconds(_fireRate);
         }
