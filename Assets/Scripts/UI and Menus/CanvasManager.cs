@@ -48,10 +48,7 @@ public class CanvasManager : MonoBehaviour
 
     public void ReturnToMainMenu()
     {
-
-        TogglePause();
-        //SceneManager.LoadSceneAsync("Main Menu");
-        
+        SceneManager.LoadSceneAsync("Main Menu");
     }
 
     public void RestartLevel()

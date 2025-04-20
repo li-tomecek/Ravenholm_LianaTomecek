@@ -13,5 +13,6 @@ public class MainMenu : MonoBehaviour
     public void StartGame()
     {
         SceneManager.LoadSceneAsync("Ravenholm");
+        Time.timeScale = 1;
     }
 }
