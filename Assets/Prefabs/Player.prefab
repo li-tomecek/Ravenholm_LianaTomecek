@@ -49,9 +49,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a419780ae244654e95dc884d8c74010, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _movementSpeed: 0.1
-  _jumpHeight: 7
   _respawnTransform: {fileID: 0}
+  _movementSpeed: 0.1
+  _jumpHeight: 5
 --- !u!33 &5607212075302040583
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -273,7 +273,7 @@ MonoBehaviour:
     m_Bits: 1
   m_VolumeTrigger: {fileID: 0}
   m_VolumeFrameworkUpdateModeOption: 2
-  m_RenderPostProcessing: 0
+  m_RenderPostProcessing: 1
   m_Antialiasing: 0
   m_AntialiasingQuality: 2
   m_StopNaN: 0
@@ -342,6 +342,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6604695009600514386, guid: 8c7f91106c8ab29478b7a09734b7973f, type: 3}
       propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8024148434891069036, guid: 8c7f91106c8ab29478b7a09734b7973f, type: 3}
+      propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8523290185098612377, guid: 8c7f91106c8ab29478b7a09734b7973f, type: 3}

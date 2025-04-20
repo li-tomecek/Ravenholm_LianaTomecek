@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 3
   tags:
   - Magnetic
+  - GravityGun
   layers:
   - Default
   - TransparentFX
