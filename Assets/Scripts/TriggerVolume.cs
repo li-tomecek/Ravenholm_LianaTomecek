@@ -6,6 +6,8 @@ public class TriggerVolume : MonoBehaviour
     [SerializeField] bool _retriggerable = false;
 
     [SerializeField] public UnityEvent _onPlayerEnterEvent;
+    [SerializeField] public UnityEvent _onPlayerExitEvent;
+
     //[SerializeField] public UnityEvent _onOtherEnterEvent;
     public void OnTriggerEnter(Collider other)
     {
@@ -13,6 +15,18 @@ public class TriggerVolume : MonoBehaviour
         if (other.gameObject.CompareTag("Player"))
         {
             _onPlayerEnterEvent.Invoke();               //player enters trigger volume
+            if (!_retriggerable)
+                Destroy(gameObject);                    //so it cannot be triggered again
+        }
+
+    }
+
+    public void OnTriggerExit(Collider other)
+    {
+
+        if (other.gameObject.CompareTag("Player"))
+        {
+            _onPlayerExitEvent.Invoke();               //player enters trigger volume
             if (!_retriggerable)
                 Destroy(gameObject);                    //so it cannot be triggered again
         }

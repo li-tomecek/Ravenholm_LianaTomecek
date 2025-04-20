@@ -3,7 +3,7 @@ using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.Rendering;
 
-public class NewMonoBehaviourScript : MonoBehaviour
+public class Turret : MonoBehaviour
 {
     [Header("Gun")]
     [SerializeField] private GameObject _bulletPrefab;
@@ -18,13 +18,12 @@ public class NewMonoBehaviourScript : MonoBehaviour
     [SerializeField] private float _maxVerticalSpread;
     [SerializeField] private float _maxHorizontalSpread;
 
-    private bool _firing = true;
+    private bool _firing;
 
     void Start()
     {
         StartCoroutine(FiringCycle());
     }
-
     private IEnumerator FiringCycle()
     {
         Quaternion rotation;

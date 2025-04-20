@@ -51,8 +51,13 @@ public class GravityGun : MonoBehaviour
                     if (_heldObject == null && _objectInSights.GetComponent<Rigidbody>())       //Pick up object
                     {
                         _heldObject = _objectInSights;
-                        _heldObject.GetComponent<BoxCollider>().enabled = false;
+                        _heldObject.GetComponent<Collider>().enabled = false;
                         _heldObject.GetComponent<Rigidbody>().isKinematic = true;
+
+                        if (_heldObject.gameObject.GetComponent<Grabbable>())
+                        {
+                            _heldObject.gameObject.GetComponent<Grabbable>().OnPickup();
+                        }
                     }
                 }
                 else if (_objectInSights.layer == LayerMask.NameToLayer("Interactable"))        //Interact with object (ex. Press a Button)
@@ -63,12 +68,26 @@ public class GravityGun : MonoBehaviour
             }
             else if(_heldObject)                                                                //Launch held object
             {
+                if (_heldObject.gameObject.GetComponent<Grabbable>())
+                {
+                    _heldObject.gameObject.GetComponent<Grabbable>().OnThrow();
+                }
+                
                 LaunchObject();
+
             }
         }
 
-        if (Input.GetKeyDown(KeyCode.Mouse1) && _heldObject)                                    //Drop the object
+        if (Input.GetKeyDown(KeyCode.Mouse1) && _heldObject)                                    //Drop Object
+        {
+            if (_heldObject.gameObject.GetComponent<Grabbable>())
+            {
+                _heldObject.gameObject.GetComponent<Grabbable>().OnThrow();
+            }
+
             DropObject();
+        }                               
+    
     }
 
     
@@ -78,7 +97,7 @@ public class GravityGun : MonoBehaviour
         if(_heldObject != null)
         {
             _heldObject.GetComponent<Rigidbody>().isKinematic = false;
-            _heldObject.GetComponent<BoxCollider>().enabled = true;
+            _heldObject.GetComponent<Collider>().enabled = true;
 
             _heldObject = null;
         }
@@ -89,7 +108,7 @@ public class GravityGun : MonoBehaviour
         if(_heldObject != null)
         {
             _heldObject.GetComponent<Rigidbody>().isKinematic = false;
-            _heldObject.GetComponent<BoxCollider>().enabled = true;
+            _heldObject.GetComponent<Collider>().enabled = true;
 
 
             _heldObject.GetComponent<Rigidbody>().AddForce(_launchVelocity * _holdPosition.forward, ForceMode.Impulse);

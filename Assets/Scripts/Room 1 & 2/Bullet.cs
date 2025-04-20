@@ -10,6 +10,6 @@ public class Bullet : MonoBehaviour
         if (_timeAlive >= _timeToDespawn)
         {
             Destroy(gameObject);
-        }
+        }          
     }
 }
