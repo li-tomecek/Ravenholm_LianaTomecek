@@ -6,7 +6,8 @@ public class PlayerController : MonoBehaviour
     private Rigidbody _rigidBody;
     private CameraLook _cameraLook;
 
-    [SerializeField] private Transform _respawnTransform;
+    //[SerializeField] private Transform _respawnTransform;
+    [SerializeField] private Checkpoint _activeCheckpoint;
 
     [Header("Movement")]
     private Vector2 _inputAxes;
@@ -90,17 +91,18 @@ public class PlayerController : MonoBehaviour
     }
 
     // ~~~ RESPAWNS ~~~
-    public void SetRespawnPoint(Transform spawn)
+    public void SetActiveCheckpoint(Checkpoint checkpoint)
     {
-        _respawnTransform = spawn;
+        _activeCheckpoint = checkpoint;
     }
 
     public void Respawn()
     {
-        Debug.Log("Respawning to " + _respawnTransform.position);
         _gravityGun.DropObject();
-        gameObject.transform.position = _respawnTransform.position;
-        gameObject.transform.rotation = _respawnTransform.rotation;
+        gameObject.transform.position = _activeCheckpoint.GetRespawnPoint().position;
+        gameObject.transform.rotation = _activeCheckpoint.GetRespawnPoint().rotation;
+
+        _activeCheckpoint._onRespawnEvent.Invoke();     //do whatever other specified custom events
     }
 
     public GravityGun GetGravityGun()
