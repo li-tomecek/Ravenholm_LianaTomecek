@@ -19,7 +19,8 @@ public class Grenade : Grabbable
     {
         //Make the grenade flash constantly
         _flashing = true;
-        StartCoroutine(PlayFlashCycle());
+        //StartCoroutine(PlayFlashCycle());
+        StartCoroutine(StartCountdown());       //start countdown on pickup instead
     }
 
     public override void OnThrow()

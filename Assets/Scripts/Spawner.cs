@@ -12,6 +12,9 @@ public class Spawner : MonoBehaviour
 
     public void SpawnObject()
     {
+        if(_spawnedObject != null)
+            Destroy(_spawnedObject);
+        
         _spawnedObject = Instantiate(_objectPrefab, transform.position, transform.rotation);
     }
 
