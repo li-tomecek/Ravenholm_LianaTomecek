@@ -1,13 +1,16 @@
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GravityGun : MonoBehaviour
 {
     [SerializeField] private Transform _sightOrigin;            //origin of the raycast for interactable objects
-    [SerializeField] private Transform _holdPosition;           //Where the object is "held" by the gravity gun
-
-    [SerializeField] private float _launchVelocity = 15f;
     [SerializeField] private float _sightDistance = 7f;
+    [SerializeField] private Image _crosshair;
+
+    [Header("Object Interaction")]
+    [SerializeField] private float _launchVelocity = 15f;
+    [SerializeField] private Transform _holdPosition;           //Where the object is "held" by the gravity gun
     [SerializeField] private LayerMask _objectMask;
 
     private GameObject _heldObject;
@@ -22,12 +25,13 @@ public class GravityGun : MonoBehaviour
         if(_heldObject == null && Physics.Raycast(_sightOrigin.position, _sightOrigin.forward, out RaycastHit hit, _sightDistance, _objectMask))
         {
             _objectInSights = hit.collider.gameObject;
+            _crosshair.color = Color.yellow;
  
         }
         else
         {
-            //Change CrosshairColor here
             _objectInSights = null;
+            _crosshair.color = Color.black;
 
         }
 
@@ -58,6 +62,8 @@ public class GravityGun : MonoBehaviour
                         {
                             _heldObject.gameObject.GetComponent<Grabbable>().OnPickup();
                         }
+
+                        _crosshair.enabled = false;
                     }
                 }
                 else if (_objectInSights.layer == LayerMask.NameToLayer("Interactable"))        //Interact with object (ex. Press a Button)
@@ -100,6 +106,7 @@ public class GravityGun : MonoBehaviour
             _heldObject.GetComponent<Collider>().enabled = true;
 
             _heldObject = null;
+            _crosshair.enabled = true;
         }
     }
 
@@ -113,6 +120,7 @@ public class GravityGun : MonoBehaviour
 
             _heldObject.GetComponent<Rigidbody>().AddForce(_launchVelocity * _holdPosition.forward, ForceMode.Impulse);
             _heldObject = null;
+            _crosshair.enabled = true;
         }
     }
 

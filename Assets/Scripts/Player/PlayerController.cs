@@ -99,8 +99,9 @@ public class PlayerController : MonoBehaviour
     public void Respawn()
     {
         _gravityGun.DropObject();
-        gameObject.transform.position = _activeCheckpoint.GetRespawnPoint().position;
-        gameObject.transform.rotation = _activeCheckpoint.GetRespawnPoint().rotation;
+        gameObject.transform.SetPositionAndRotation(
+            _activeCheckpoint.GetRespawnPoint().position, 
+            _activeCheckpoint.GetRespawnPoint().rotation);
 
         _activeCheckpoint._onRespawnEvent.Invoke();     //do whatever other specified custom events
     }
